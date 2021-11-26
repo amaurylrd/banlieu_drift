@@ -13,7 +13,7 @@ def render(screen):
     
     global score
     score = (pygame.time.get_ticks() - start) / 330
-    font = pygame.font.Font('./ressources/fonts/Over the Rainbow.ttf', 60)
+    font = pygame.font.Font('./ressources/fonts/font.ttf', 60)
     txt = font.render(str(int(score)), True, (255, 255, 255))
     txt_pos = txt.get_rect(center = (screen_width / 2, font.get_ascent()))
     screen.blit(txt, txt_pos)
