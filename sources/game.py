@@ -13,10 +13,10 @@ def render(screen):
     
     global score
     score = (pygame.time.get_ticks() - start) / 330
-    # font = pygame.font.Font('./ressources/fonts/Over the Rainbow.ttf', 60)
-    # txt = font.render(str(score), True, (255, 255, 255))
-    # txt_pos = txt.get_rect(center = (screen_width / 2, font.get_ascent()))
-    # screen.blit(txt, txt_pos)
+    font = pygame.font.Font('./ressources/fonts/Over the Rainbow.ttf', 60)
+    txt = font.render(str(int(score)), True, (255, 255, 255))
+    txt_pos = txt.get_rect(center = (screen_width / 2, font.get_ascent()))
+    screen.blit(txt, txt_pos)
     
     
     map.display(screen, score, car.posx)
@@ -48,13 +48,8 @@ map = Map()
 
 def main():
     pygame.init()
+    
     screen_size = pygame.display.Info().current_w, pygame.display.Info().current_h
-    print(screen_size)
-    # if False:
-    #     user32 = ctypes. windll.user32
-    #     screen_size = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-    # else:
-    #     screen_size = gtk.gdk.screen_width(), gtk.gdk.screen_height()
     screen = pygame.display.set_mode(screen_size, False)
     
     pygame.display.set_caption('Banlieu Drift')
