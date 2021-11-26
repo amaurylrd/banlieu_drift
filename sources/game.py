@@ -2,6 +2,7 @@ import pygame
 import ctypes
 
 from car import Car
+from map import Map
 
 start = None
 score = 0
@@ -11,13 +12,14 @@ def render(screen):
     screen.fill((0, 0, 0))
     
     global score
-    score = (pygame.time.get_ticks() - start) // 150
-    font = pygame.font.Font('./ressources/fonts/Over the Rainbow.ttf', 60)
-    txt = font.render(str(score), True, (255, 255, 255))
-    txt_pos = txt.get_rect(center = (screen_width / 2, font.get_ascent()))
-    screen.blit(txt, txt_pos)
+    score = (pygame.time.get_ticks() - start) / 330
+    # font = pygame.font.Font('./ressources/fonts/Over the Rainbow.ttf', 60)
+    # txt = font.render(str(score), True, (255, 255, 255))
+    # txt_pos = txt.get_rect(center = (screen_width / 2, font.get_ascent()))
+    # screen.blit(txt, txt_pos)
     
     
+    map.display(screen, score, car.posx)
     car.display(screen)
     
     pygame.display.update()
@@ -32,22 +34,27 @@ def process_events():
         
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
-                car.dir = -1
+                car.dir_target = -1
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 return True
             if event.key == pygame.K_SPACE:
-                car.dir = 1
+                car.dir_target = 1
     
     return False
 
 car = Car()
+map = Map()
 
 def main():
     pygame.init()
-    
-    user32 = ctypes.windll.user32
-    screen_size = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+    screen_size = pygame.display.Info().current_w, pygame.display.Info().current_h
+    print(screen_size)
+    # if False:
+    #     user32 = ctypes. windll.user32
+    #     screen_size = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+    # else:
+    #     screen_size = gtk.gdk.screen_width(), gtk.gdk.screen_height()
     screen = pygame.display.set_mode(screen_size, False)
     
     pygame.display.set_caption('Banlieu Drift')
