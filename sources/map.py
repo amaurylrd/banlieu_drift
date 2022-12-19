@@ -11,11 +11,9 @@ def draw_tile(screen, x, y, camx):
 
 class Map:
 	def __init__(self):
-		self.tiles = []
 		self.lastscore = 0
 		self.dir = 1
-		for i in range(10):
-			self.tiles.append(-i)
+		self.tiles = [-i for i in range(10)]
 	
 	def get_next_tile(self):
 		r = randint(0, 2)
